@@ -1,0 +1,54 @@
+.primaryHeading {
+    font-size: clamp(1rem, 3vw, 2rem);
+    color: #4c4c4c;
+    /* line-height: 5rem; */
+    max-width: 600px;
+}
+
+.secondaryButton {
+    padding: 1rem 2.5rem;
+    background-color: #2c1f31;
+    outline: none;
+    border: none;
+    border-radius: 5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondaryButton:hover {
+    background-color: #8565b8a8;
+}
+
+.contactPageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 6rem 0rem;
+}
+
+.contactFormContainer {
+    background-color: white;
+    max-width: 700px;
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 5rem;
+}
+
+.contactFormContainer input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+}

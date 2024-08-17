@@ -1,0 +1,13 @@
+.register-container{
+    margin-top: 100px;
+    padding: 20px; /* Optional: add some padding */
+    background-color: #f8f9fa;
+}
+.button-Login{
+    border-radius: 10px;
+    font-size: large;
+    margin-bottom: 15px;
+    color: white;
+    height: 40px;
+    background-color: #2c1f31;
+}
