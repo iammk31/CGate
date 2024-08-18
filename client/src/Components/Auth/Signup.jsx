@@ -1,8 +1,6 @@
 import React from 'react';
 import './Signup.css';
-// import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
