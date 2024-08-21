@@ -3,31 +3,35 @@ import styles from './Navbar.module.css';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+    const [navbarVisible, setNavbarVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
 
-    const [navbarVisible, setNavbarVisible] = useState(false);
-
-    const scrollFunction = () => {
-        if (window.scrollY > 20) {
-            setNavbarVisible(true);
-        } else {
+    const handleScroll = () => {
+        if (window.scrollY > lastScrollY) {
             setNavbarVisible(false);
+        } else {
+            setNavbarVisible(true);
         }
+        setLastScrollY(window.scrollY);
     };
 
     useEffect(() => {
-        window.onscroll = scrollFunction;
+        window.addEventListener('scroll', handleScroll);
         return () => {
-            window.onscroll = null;
+            window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [lastScrollY]);
 
     return (
-        <nav className={styles.navbar} style={{ top: navbarVisible ? "0" : "0px", }}>
-            
-                <Link to={"/"}>
-                    <img src={'../../images/logo.gif'} alt="" style={{ width: '68px', height: '53px' }} />
-                </Link>
-        
+        <nav
+            className={styles.navbar}
+            style={{
+                top: navbarVisible ? "0" : "-100px", // Adjust the negative value according to your navbar's height
+            }}
+        >
+            <Link to={"/"}>
+                <img src={'../../images/logo.gif'} alt="" style={{ width: '68px', height: '53px' }} />
+            </Link>
             <ul className={styles.menu}>
                 <div className={styles.home}>
                     <li className={styles.item}><Link to={"/"}>Home</Link></li>
@@ -35,8 +39,8 @@ const Navbar = () => {
                     <li className={`${styles.item} ${styles.dropdown}`}>
                         <Link to={"/gate-special"}>Gate2025</Link>
                         <ul className={styles.dropdownMenu}>
-                            <li className={styles.dropdownItem}><Link to={"/gate-overview"}>Overview</Link></li>
-                            <li className={styles.dropdownItem}><Link to={"/gate-schedule"}>Schedule</Link></li>
+                            <li className={styles.dropdownItem}><Link to={"/PreviousYear"}>Previous Year</Link></li>
+                            <li className={styles.dropdownItem}><Link to={"/gate-schedule"}>Prep Videos</Link></li>
                             <li className={styles.dropdownItem}><Link to={"/gate-resources"}>Resources</Link></li>
                         </ul>
                     </li>
@@ -48,6 +52,6 @@ const Navbar = () => {
             </ul>
         </nav>
     );
-}
+};
 
 export default Navbar;

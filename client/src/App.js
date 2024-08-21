@@ -6,6 +6,8 @@ import Contact from './Components/Contact';
 import Footer from './Components/Footer';
 import Login from './Components/Auth/Login';
 import Signup from './Components/Auth/Signup';
+import PreviousYear from './Components/Gate2025/PreviousYear';
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
         />
         <Route path="/login" element={<><Navbar /><Login /><Footer /></>} />
         <Route path="/signup" element={<><Navbar /><Signup /><Footer /></>} />
+        <Route path="PreviousYear" element={<><Navbar /><PreviousYear /><Footer /></>} />
       </Routes>
     </Router>
   );

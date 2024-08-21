@@ -13,9 +13,10 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  transition: top 0.3s;
+  transition: top 0.3s ease-in-out; /* Smooth transition for the up-down movement */
   z-index: 1000;
 }
+
 
 .navbar a {
   padding: 4px 8px;
