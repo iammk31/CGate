@@ -7,10 +7,18 @@ const VideoPlayer = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/videos')
+    axios.get("http://localhost:4000/api/v1/cgate/videos")
       .then(response => setVideos(response.data))
       .catch(error => console.error('Error fetching videos:', error));
   }, []);
+
+  const handleVideoClick = (videoId) => {
+    if (currentVideo === videoId) {
+      setCurrentVideo(null);  // Close the video if it's already playing
+    } else {
+      setCurrentVideo(videoId);  // Open the selected video
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -27,17 +35,25 @@ const VideoPlayer = () => {
           ></iframe>
         </div>
       ) : (
-        <p>Select a video to play</p>
+        <h3>Select Videos To Play</h3>
       )}
       <div className={styles.videoList}>
         {videos.map(video => (
-          <button
+          <div
             key={video.id}
-            onClick={() => setCurrentVideo(video.videoId)}
-            className={styles.videoButton}
+            className={styles.videoCard}
+            onClick={() => handleVideoClick(video.videoId)}
           >
-            {video.title}
-          </button>
+            <img 
+              src={`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`} 
+              alt={video.title}
+              className={styles.thumbnail}
+            />
+            <div className={styles.videoInfo}>
+              <h4>{video.title}</h4>
+              {/* Add more details here like channel name, views, etc., if available */}
+            </div>
+          </div>
         ))}
       </div>
     </div>

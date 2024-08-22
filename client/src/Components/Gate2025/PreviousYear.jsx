@@ -40,6 +40,13 @@ const YearCards = () => {
       { name: 'Mechanical', pdfUrl: '/pdfs/mechanical2019.pdf' },
       { name: 'Civil', pdfUrl: 'https://gate.iitkgp.ac.in/documents/gatepapers/2019/ce1_2019.pdf' },
     ],
+    '2018': [
+      { name: 'Computer Science', pdfUrl: 'https://gate.iitkgp.ac.in/documents/gatepapers/2019/cs_2019.pdf' },
+      { name: 'Aerospace', pdfUrl: '/pdfs/aerospace2019.pdf' },
+      { name: 'Agriculture', pdfUrl: '/pdfs/agriculture2019.pdf' },
+      { name: 'Mechanical', pdfUrl: '/pdfs/mechanical2019.pdf' },
+      { name: 'Civil', pdfUrl: 'https://gate.iitkgp.ac.in/documents/gatepapers/2019/ce1_2019.pdf' },
+    ],
   };
 
   const [selectedYear, setSelectedYear] = useState(null);
