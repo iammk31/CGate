@@ -16,15 +16,15 @@ app.use(
         credentials: true,
     })
 );
-
+console.log('YOUTUBE_API:', process.env.YOUTUBE_API);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
 app.use("/api/v1/cgate", cgateRouter);
-app.get("/", (req, res, next)=>{return res.status(200).json({
-  success: true,
-  message: "HELLO WORLD AGAIN"
-})})
+// app.get("/", (req, res, next)=>{return res.status(200).json({
+//   success: true,
+//   message: "HELLO WORLD AGAIN"
+// })})
 
 dbConnection();
 
