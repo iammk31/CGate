@@ -16,7 +16,8 @@ app.use(
         credentials: true,
     })
 );
-console.log('YOUTUBE_API:', process.env.YOUTUBE_API);
+// console.log('YOUTUBE_API:', process.env.YOUTUBE_API);
+// console.log('Playlist_ID:', process.env.PLAYLIST_ID);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
