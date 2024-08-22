@@ -37,10 +37,10 @@ const Navbar = () => {
                     <li className={styles.item}><Link to={"/"}>Home</Link></li>
                     <li className={styles.item}><Link to={"/courses"}>Courses</Link></li>
                     <li className={`${styles.item} ${styles.dropdown}`}>
-                        <Link to={"/gate-special"}>Gate2025</Link>
+                        <Link to={""}>Gate2025</Link>
                         <ul className={styles.dropdownMenu}>
                             <li className={styles.dropdownItem}><Link to={"/PreviousYear"}>Previous Year</Link></li>
-                            <li className={styles.dropdownItem}><Link to={"/gate-schedule"}>Prep Videos</Link></li>
+                            <li className={styles.dropdownItem}><Link to={"/PrepVideos"}>Prep Videos</Link></li>
                             <li className={styles.dropdownItem}><Link to={"/gate-resources"}>Resources</Link></li>
                         </ul>
                     </li>

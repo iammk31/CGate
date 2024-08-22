@@ -7,6 +7,7 @@ import Footer from './Components/Footer';
 import Login from './Components/Auth/Login';
 import Signup from './Components/Auth/Signup';
 import PreviousYear from './Components/Gate2025/PreviousYear';
+import PrepVideos from './Components/Gate2025/PrepVideos';
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<><Navbar /><Login /><Footer /></>} />
         <Route path="/signup" element={<><Navbar /><Signup /><Footer /></>} />
         <Route path="PreviousYear" element={<><Navbar /><PreviousYear /><Footer /></>} />
+        <Route path="PrepVideos" element={<><Navbar /><PrepVideos /><Footer /></>} />
       </Routes>
     </Router>
   );
