@@ -1,0 +1,60 @@
+.quizForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: grey;
+}
+
+.quizItem {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.questionInput {
+    padding: 7px;
+    border: 2px solid #130909b9;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-left: 5px;
+}
+
+.optionsContainer {
+    display: flex;
+    gap: 10px;
+    border-radius: 4px;
+}
+
+.optionInput {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 2px solid #130909b9;
+}
+
+.submitBtn {
+    background-color: #020202;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+    .optionsContainer {
+        flex-direction: column;
+    }
+
+    .submitBtn {
+        width: 100%;
+    }
+}

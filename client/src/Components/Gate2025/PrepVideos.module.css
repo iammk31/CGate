@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  margin-top: 5rem;
+  margin-top: 4rem;
+  background-color: black;
 }
 
 .videoWrapper {
@@ -19,8 +20,8 @@
 
 .videoCard {
   width: 320px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: #000000;
+  border: 2px solid #2c1f31;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -44,10 +45,11 @@
 .videoInfo h4 {
   font-size: 16px;
   margin: 10px 0;
-  color: #333;
+  color: #ffebeb;
 }
-h3{
+.container h3{
   text-decoration: underline;
+  color: #ffffff;
 }
 
 /* Add more styles for additional details like channel name, views, etc. */

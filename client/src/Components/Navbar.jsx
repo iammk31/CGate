@@ -35,7 +35,7 @@ const Navbar = () => {
             <ul className={styles.menu}>
                 <div className={styles.home}>
                     <li className={styles.item}><Link to={"/"}>Home</Link></li>
-                    <li className={styles.item}><Link to={"/courses"}>Courses</Link></li>
+                    <li className={styles.item}><Link to={"/Admin"}>Admin</Link></li>
                     <li className={`${styles.item} ${styles.dropdown}`}>
                         <Link to={""}>Gate2025</Link>
                         <ul className={styles.dropdownMenu}>

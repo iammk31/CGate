@@ -8,6 +8,7 @@ import Login from './Components/Auth/Login';
 import Signup from './Components/Auth/Signup';
 import PreviousYear from './Components/Gate2025/PreviousYear';
 import PrepVideos from './Components/Gate2025/PrepVideos';
+import Admin from './Components/Admin/Admin';
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/signup" element={<><Navbar /><Signup /><Footer /></>} />
         <Route path="PreviousYear" element={<><Navbar /><PreviousYear /><Footer /></>} />
         <Route path="PrepVideos" element={<><Navbar /><PrepVideos /><Footer /></>} />
+        <Route path="Admin" element={<><Admin /></>} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,149 @@
+
+.adminPage {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c1f31;
+    padding: 10px 20px;
+    height: 12vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.loginBtn {
+    background-color: #000000;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropbtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dropdownContent,
+.subDropdownContent {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdownContent button,
+.subDropdownContent button {
+    background-color: white;
+    color: black;
+    padding: 12px 16px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdownContent button:hover,
+.subDropdownContent button:hover {
+    background-color: #f1f1f1;
+}
+
+.backBtn {
+    font-weight: bold;
+    color: #000000;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-top: 12vh;
+}
+
+.quizForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quizItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.questionInput {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.optionsContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.optionInput {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.submitBtn {
+    background-color: #020202;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+    .optionsContainer {
+        flex-direction: column;
+    }
+
+    .navbar {
+        padding: 10px;
+        height: auto;
+    }
+
+    .submitBtn {
+        width: 100%;
+    }
+}

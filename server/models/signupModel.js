@@ -34,6 +34,7 @@ const signupSchema = new mongoose.Schema({
     minLength: [10, "Phone number must contain 10 Digits."],
     maxLength: [10, "Phone number must contain 10 Digits."],
   },
+
 });
 
 signupSchema.methods.comparePassword = async function (candidatePassword) {
