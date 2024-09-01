@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styles from './Navbar.module.css';
 import { Link,useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from "../store/authSlice";
 
 const Navbar = () => {
     const [navbarVisible, setNavbarVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.auth.token);
+    
     useEffect(() => {   
-        const token = localStorage.getItem('token');
         if (token!==null) {
             setLoggedIn(true);
         }
@@ -25,9 +28,9 @@ const Navbar = () => {
         setLastScrollY(window.scrollY);
     };
     const handleLogout = () => {
+        dispatch(logout());
         localStorage.clear();
         setLoggedIn(false);
-        
         navigate("/");
     }
     useEffect(() => {

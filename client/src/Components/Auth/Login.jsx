@@ -1,7 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React,{useState} from 'react';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from "axios";
 import toast from "react-hot-toast";
 import './Login.css';
@@ -17,6 +15,8 @@ import {
   from 'mdb-react-ui-kit';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import { useDispatch } from 'react-redux'
+import { login } from '../../store/authSlice';
 
 
 
@@ -25,6 +25,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -42,18 +43,19 @@ const Login = () => {
       const { token, user } = data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      if (data.token!=null && data.user.uType === "admin") {
+          dispatch(login({ token, user }));
+          localStorage.setItem('admin', data.user.uType);
+          navigate("/admin");
+      }else{
+        dispatch(login({ token, user }));
+        navigate("/");
+      }
 
 
       toast.success(data.message);
       setEmail("");
       setPassword("");
-      if (data.token!=null && data.user.uType === "admin") {
-          localStorage.setItem('admin', data.user.uType);
-          navigate("/admin");
-      }else{
-        
-        navigate("/");
-      }
     } catch (error) {
       toast.error(error.response.data.message);
     }
