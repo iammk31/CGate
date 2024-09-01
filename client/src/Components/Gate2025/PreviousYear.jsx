@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './PreviousYear.module.css';
+import Footer from '../Footer';
+import Navbar from '../Navbar';
 
 const YearCards = () => {
   const years = ['2023', '2022', '2021', '2020', '2019', '2018'];
@@ -64,6 +66,8 @@ const YearCards = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div>
       <h1 className={styles.title}>Previous Year Papers</h1>
       <div className={styles.cardContainer}>
@@ -87,6 +91,8 @@ const YearCards = () => {
         ))}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

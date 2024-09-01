@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styles from './Navbar.module.css';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const [navbarVisible, setNavbarVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
+    useEffect(() => {   
+        const token = localStorage.getItem('token');
+        if (token!==null) {
+            setLoggedIn(true);
+        }
+        
+    }, [loggedIn]);
+    
     const handleScroll = () => {
         if (window.scrollY > lastScrollY) {
             setNavbarVisible(false);
@@ -14,14 +24,18 @@ const Navbar = () => {
         }
         setLastScrollY(window.scrollY);
     };
-
+    const handleLogout = () => {
+        localStorage.clear();
+        setLoggedIn(false);
+        
+        navigate("/");
+    }
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [lastScrollY]);
-
     return (
         <nav
             className={styles.navbar}
@@ -34,8 +48,6 @@ const Navbar = () => {
             </Link>
             <ul className={styles.menu}>
                 <div className={styles.home}>
-                    <li className={styles.item}><Link to={"/"}>Home</Link></li>
-                    <li className={styles.item}><Link to={"/Admin"}>Admin</Link></li>
                     <li className={`${styles.item} ${styles.dropdown}`}>
                         <Link to={""}>Gate2025</Link>
                         <ul className={styles.dropdownMenu}>
@@ -45,10 +57,10 @@ const Navbar = () => {
                         </ul>
                     </li>
                 </div>
-                <div className={styles.login}>
+                {loggedIn ? <button onClick={handleLogout} className={styles.button}>Logout</button> : (<div className={styles.login}>
                     <button className={styles.button}><Link to={"/Login"}>Login</Link></button>
                     <button className={styles.signupButton}><Link to={"/Signup"}>Signup</Link></button>
-                </div>
+                </div>)}
             </ul>
         </nav>
     );
