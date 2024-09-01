@@ -15,13 +15,16 @@ import {
   MDBInput
 }
   from 'mdb-react-ui-kit';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
+
+
 
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -35,16 +38,30 @@ const Login = () => {
           withCredentials: true,
         }
       );
+      console.log(data);
+      const { token, user } = data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+
       toast.success(data.message);
       setEmail("");
       setPassword("");
-      navigate("/success");
+      if (data.token!=null && data.user.uType === "admin") {
+          localStorage.setItem('admin', data.user.uType);
+          navigate("/admin");
+      }else{
+        
+        navigate("/");
+      }
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
 
   return (
+    <>
+    <Navbar/>
     <MDBContainer className="register-container">
 
       <MDBCard>
@@ -82,11 +99,11 @@ const Login = () => {
               <button className="button-Login"
                 type="submit"
                 onClick={handleLogin}>Login</button>
-              <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>Don't have an account? <a href="#!" style={{ color: '#393f81' }}><Link to={"/Signup"}>Register here</Link></a></p>
+              <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>Don't have an account? <Link to="/signup" style={{ color: '#393f81' }}>Register here</Link></p>
 
               <div className='d-flex flex-row justify-content-start'>
-                <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                <a href="#!" className="small text-muted">Privacy policy</a>
+                <Link to="/" className="small text-muted me-1">Terms of use.</Link>
+                <Link to="/" className="small text-muted">Privacy policy</Link>
               </div>
 
             </MDBCardBody>
@@ -96,6 +113,8 @@ const Login = () => {
       </MDBCard>
 
     </MDBContainer>
+    <Footer/>
+    </>
   );
 }
 

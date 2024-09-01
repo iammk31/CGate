@@ -1,6 +1,6 @@
 import ErrorHandler from "../error/error.js";
 import { Signup } from "../models/signupModel.js";
-
+import jwt from 'jsonwebtoken'
 const send_login = async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -15,12 +15,16 @@ const send_login = async (req, res, next) => {
         if (!isMatch) {
             return next(new ErrorHandler("Invalid credentials", 401));
         }
-        // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        //     expiresIn: process.env.JWT_EXPIRES_IN,
-        // });
+        if (user.uType !== 'user' && user.uType !== 'admin') {
+            return next(new ErrorHandler("Unauthorized user type", 403));
+        }
+        const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+        });
         res.status(200).json({
             success: true,
             message: "User logged in successfully",
+            token,
             user
         });
     } catch (error) {

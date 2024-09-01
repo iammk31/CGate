@@ -13,9 +13,9 @@ const signupSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    required: true,
-    minLength: [3, "Last name must be of at least 3 Characters."],
-    maxLength: [30, "Last name cannot exceed 30 Characters."],
+    required: false,
+    // minLength: [3, "Last name must be of at least 3 Characters."],
+    // maxLength: [30, "Last name cannot exceed 30 Characters."],
   },
   password: {
     type: String,
@@ -34,7 +34,10 @@ const signupSchema = new mongoose.Schema({
     minLength: [10, "Phone number must contain 10 Digits."],
     maxLength: [10, "Phone number must contain 10 Digits."],
   },
-
+  uType: {
+    type: String,
+    required: true,
+  },
 });
 
 signupSchema.methods.comparePassword = async function (candidatePassword) {

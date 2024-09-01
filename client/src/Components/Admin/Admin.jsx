@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Admin.module.css';
-import { Link } from 'react-router-dom';
 import OSQuiz from './OSQuiz'; // Import the OSQuiz component
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 const AdminPage = () => {
   const [openBranch, setOpenBranch] = useState(false);
@@ -9,14 +10,9 @@ const AdminPage = () => {
   const [selectedSubject, setSelectedSubject] = useState(null);
 
   return (
+    <>
+      <Navbar />
     <div className={styles.adminPage}>
-      <nav className={styles.navbar}>
-        <Link to={"/"}>
-          <img src={'../../images/logo.gif'} alt="Logo" style={{ width: '68px', height: '53px' }} />
-        </Link>
-
-        <button className={styles.loginBtn}>Login</button>
-      </nav>
       <div className={styles.content}>
         {/* Render the OSQuiz component only when 'OS' is selected */}
         {selectedSubject === 'OS' && <OSQuiz />}  
@@ -59,6 +55,8 @@ const AdminPage = () => {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './PrepVideos.module.css';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 const VideoPlayer = () => {
   const [videos, setVideos] = useState([]);
@@ -21,6 +23,8 @@ const VideoPlayer = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className={styles.container}>
       {currentVideo ? (
         <div className={styles.videoWrapper}>
@@ -57,6 +61,8 @@ const VideoPlayer = () => {
         ))}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
