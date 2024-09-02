@@ -5,7 +5,6 @@ import { Link,useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import {    MDBContainer,    MDBCard,    MDBCardBody,    MDBRow,    MDBCol,    MDBIcon,    MDBInput}   from 'mdb-react-ui-kit';
-import { login } from '../../store/authSlice';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 const Signup = () => {

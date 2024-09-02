@@ -52,12 +52,11 @@ const Login = () => {
         navigate("/");
       }
 
-
-      toast.success(data.message);
       setEmail("");
       setPassword("");
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error(error);
+      
     }
   };
 

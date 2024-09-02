@@ -7,7 +7,6 @@ import Signup from "./Components/Auth/Signup";
 import PreviousYear from "./Components/Gate2025/PreviousYear";
 import PrepVideos from "./Components/Gate2025/PrepVideos";
 import Admin from "./Components/Admin/Admin";
-<<<<<<< HEAD
 import UserOSQuiz from "./Components/Gate2025/UserOSQuiz";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,47 +22,46 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-<<<<<<< HEAD
         <Route
           path="/login"
           element={
-              <Login />
+            <Login />
           }
         />
         <Route
           path="/signup"
           element={
-              <Signup />
+            <Signup />
           }
         />
         <Route
           path="/PreviousYear"
           element={
-            
-              <PreviousYear />
+
+            <PreviousYear />
 
           }
         />
         <Route
           path="/PrepVideos"
           element={
-            
-              <PrepVideos />
-            
+
+            <PrepVideos />
+
           }
         />
         <Route
           path="/UserOSQuiz"
           element={
-            
-              <UserOSQuiz />
-            
+
+            <UserOSQuiz />
+
           }
         />
         {loggedIn && <Route
           path="/admin"
           element={
-              <Admin />
+            <Admin />
           }
         />}
       </Routes>
