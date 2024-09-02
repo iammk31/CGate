@@ -9,11 +9,13 @@ import Signup from "./Components/Auth/Signup";
 import PreviousYear from "./Components/Gate2025/PreviousYear";
 import PrepVideos from "./Components/Gate2025/PrepVideos";
 import Admin from "./Components/Admin/Admin";
+import { useSelector } from "react-redux";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
-    if (token) {
+    if (token && user.uType==="admin") {
       setLoggedIn(true);
     }
   }, [token]);
@@ -22,42 +24,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={
-              <Login />
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-              <Signup />
-          }
-        />
-        <Route
-          path="/PreviousYear"
-          element={
-            
-              <PreviousYear />
-
-          }
-        />
-        <Route
-          path="/PrepVideos"
-          element={
-            
-              <PrepVideos />
-            
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            
-              <Admin />
-            
-          }
-        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/PreviousYear" element={<PreviousYear />} />
+        <Route path="/PrepVideos" element={<PrepVideos />} />
+        {loggedIn && <Route path="/admin" element={<Admin />} />}
       </Routes>
     </Router>
   );
