@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../store/authSlice";
 import { getUserData } from "../../store/userSlice";
 
 function Verify() {
@@ -28,12 +29,19 @@ function Verify() {
           "http://localhost:4000/api/v1/cgate/send",
           userData
         );
-
+        const data = await signupStatus.data;
+        const { token, user } = data;
         if (signupStatus.data.success) {
           toast.success("Signup successful!");
-          
-          navigate("/login");
-          dispatch(getUserData({}))
+          dispatch(getUserData({}));
+          if (data.token != null && data.user.uType === "admin") {
+            dispatch(login({ token, user }));
+            localStorage.setItem("admin", data.user.uType);
+            navigate("/admin");
+          } else {
+            dispatch(login({ token, user }));
+            navigate("/");
+          }
         }
       } else {
         toast.error("OTP verification failed.");

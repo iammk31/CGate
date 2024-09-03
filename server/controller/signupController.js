@@ -9,10 +9,10 @@ const generateOTP = () => {
 
 }
 export const sendOtp = async (req, res, next) => {
-    console.log(req.body);
+    
     
     const { email } = req.body;
-    console.log(email);
+    
     
 
     if (!email) {
@@ -68,7 +68,6 @@ const send_signup = async (req, res, next) => {
     if (!firstName || !email || !password || !phone) {
         return next(new ErrorHandler("Please Fill The Form!", 400));
     }
-    console.log(firstName, lastName, email, password, phone, uType);
     
     try {
         
@@ -76,22 +75,23 @@ const send_signup = async (req, res, next) => {
         // const { firstName, lastName, password, phone, uType } = req.body;
         const user = await Signup.create({ firstName, lastName, email, password, phone, uType });
 
-        // const token = jwt.sign({ id: user.email, uType: user.uType }, process.env.JWT_SECRET, {
-        //     expiresIn: process.env.JWT_EXPIRES_IN,
-        // });
+        const token = jwt.sign({ id: user.email, uType: user.uType }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+        });
+        
+        
+        
 
         await Verify.deleteOne({ email });
 
         res.status(201).json({
             success: true,
             message: "User registered successfully!",
-            // token,
-            // user
+            token,
+            user
         });
 
     } catch (error) {
-        console.log("inside catch");
-        console.log(error);
         if (error.name === 'ValidationError') {
             const validationErrors = Object.values(error.errors).map(err => err.message);
             return next(new ErrorHandler(validationErrors.join(', '), 400));
@@ -123,8 +123,6 @@ export const verify_signup = async (req, res, next) => {
             // user
         });
     } catch (error) {
-        console.log("inside catch");
-        console.log(error);
         return next(error);
     }
 };
