@@ -8,6 +8,7 @@ import quizRouter from './routes/quizRoute.js';
 
 const app = express();
 dotenv.config({ path: './config/config.env' });
+app.use(express.json());
 
 app.use(
   cors({
@@ -17,7 +18,6 @@ app.use(
   })
 );
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/cgate', cgateRouter);
