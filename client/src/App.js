@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import Login from "./Components/Auth/Login";
 import Signup from "./Components/Auth/Signup";
+import Verify from "./Components/Auth/Verify";
+import Admin from "./Components/Admin/Admin";
 import PreviousYear from "./Components/Gate2025/PreviousYear";
 import PrepVideos from "./Components/Gate2025/PrepVideos";
-import Admin from "./Components/Admin/Admin";
 import UserOSQuiz from "./Components/Gate2025/UserOSQuiz";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,48 +23,13 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={
-            <Login />
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <Signup />
-          }
-        />
-        <Route
-          path="/PreviousYear"
-          element={
-
-            <PreviousYear />
-
-          }
-        />
-        <Route
-          path="/PrepVideos"
-          element={
-
-            <PrepVideos />
-
-          }
-        />
-        <Route
-          path="/UserOSQuiz"
-          element={
-
-            <UserOSQuiz />
-
-          }
-        />
-        {loggedIn && <Route
-          path="/admin"
-          element={
-            <Admin />
-          }
-        />}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/verify" element={<Verify/>} />
+        <Route path="/PreviousYear" element={<PreviousYear />} />
+        <Route path="/PrepVideos" element={<PrepVideos />} />
+        <Route path="/UserOSQuiz" element={<UserOSQuiz />} />
+        {loggedIn && <Route path="/admin" element={<Admin />} />}
       </Routes>
     </Router>
   );
