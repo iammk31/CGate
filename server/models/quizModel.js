@@ -1,24 +1,14 @@
 import mongoose from 'mongoose';
 
 const quizSchema = new mongoose.Schema({
-  question: {
-    type: String,
-    required: true,
-  },
-  options: [
+  subject: { type: String, required: true },
+  questions: [
     {
-      type: String,
-      required: true,
+      question: { type: String, required: true },
+      options: [{ type: String, required: true }],
+      correctOptionIndex: { type: Number, required: true }, // Stores index of the correct option
     },
   ],
-  correctAnswer: {
-    type: String,
-    required: true,
-  },
-  subject: {
-    type: String,
-    required: true,
-  },
 });
 
 const Quiz = mongoose.model('Quiz', quizSchema);

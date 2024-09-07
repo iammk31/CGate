@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../store/authSlice";
 import { getUserData } from "../../store/userSlice";
+import styles from './verify.module.css';
 
 function Verify() {
   const [otp, setOtp] = useState("");
@@ -54,6 +55,7 @@ function Verify() {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className={styles.inputOtp}
         type="text"
         placeholder="OTP"
         onChange={(e) => setOtp(e.target.value)}

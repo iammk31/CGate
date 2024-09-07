@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 const OSQuiz = () => {
   const [quizzes, setQuizzes] = useState([
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
-    { question: '', options: ['', '', '', ''] },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
+    { question: '', options: ['', '', '', ''], correctOptionIndex: null },
   ]);
 
   const navigate = useNavigate();
@@ -27,6 +27,12 @@ const OSQuiz = () => {
   const handleQuestionChange = (quizIndex, value) => {
     const updatedQuizzes = [...quizzes];
     updatedQuizzes[quizIndex].question = value;
+    setQuizzes(updatedQuizzes);
+  };
+
+  const handleCorrectOptionChange = (quizIndex, optionIndex) => {
+    const updatedQuizzes = [...quizzes];
+    updatedQuizzes[quizIndex].correctOptionIndex = optionIndex;
     setQuizzes(updatedQuizzes);
   };
 
@@ -73,16 +79,27 @@ const OSQuiz = () => {
           </label>
           <div className={styles.optionsContainer}>
             {quiz.options.map((option, optionIndex) => (
-              <input
-                key={optionIndex}
-                type="text"
-                placeholder={`Option ${optionIndex + 1}`}
-                value={option}
-                onChange={(e) =>
-                  handleOptionChange(quizIndex, optionIndex, e.target.value)
-                }
-                className={styles.optionInput}
-              />
+              <div key={optionIndex} className={styles.optionWrapper}>
+                <input
+                  type="text"
+                  placeholder={`Option ${optionIndex + 1}`}
+                  value={option}
+                  onChange={(e) =>
+                    handleOptionChange(quizIndex, optionIndex, e.target.value)
+                  }
+                  className={styles.optionInput}
+                />
+                <label>
+                  <input
+                    type="radio"
+                    name={`correctOption-${quizIndex}`}
+                    checked={quiz.correctOptionIndex === optionIndex}
+                    onChange={() => handleCorrectOptionChange(quizIndex, optionIndex)}
+                    className={styles.correctOptionRadio}
+                  />
+                  Correct Answer
+                </label>
+              </div>
             ))}
           </div>
         </div>

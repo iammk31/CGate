@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './Admin.module.css';
 import OSQuiz from './OSQuiz'; // Import the OSQuiz component
 import Navbar from '../Navbar';
-import Footer from '../Footer';
 
 const AdminPage = () => {
   const [openBranch, setOpenBranch] = useState(false);
@@ -55,7 +54,6 @@ const AdminPage = () => {
         )}
       </div>
     </div>
-    <Footer />
     </>
   );
 };

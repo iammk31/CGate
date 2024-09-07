@@ -1,64 +1,85 @@
 .quizContainer {
-    background-color: #f5f7fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 50px auto;
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #ad48483a;
+    border-radius: 8px;
+  }
+  
+  .title {
     text-align: center;
-}
-
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.questionContainer {
-    margin-top: 20px;
-}
-
-.questionText {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.optionsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.optionLabel {
-    font-size: 16px;
     color: #333;
     margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.radioInput {
+  }
+  
+  .questionContainer,
+  .resultContainer {
+    margin-top: 20px;
+  }
+  
+  .questionText {
+    font-size: 1.2rem;
+    color: #222;
+  }
+  
+  .optionsContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .optionLabel {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  
+  .radioInput {
     margin-right: 10px;
-}
-
-.nextButton {
-    background-color: #007bff;
-    color: white;
+  }
+  
+  .nextButton {
+    margin-top: 20px;
     padding: 10px 20px;
+    background-color: #161e27;
+    color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-}
-
-.nextButton:hover {
-    background-color: #0056b3;
-}
+    border-radius: 5px;
+  }
+  
+  .resultTitle {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007bff;
+  }
+  
+  .resultScore {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .questionList {
+    margin-top: 20px;
+  }
+  
+  .questionResult {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .correct {
+    color: green;
+  }
+  
+  .incorrect {
+    color: red;
+  }
+  
+  .correctAnswer {
+    color: #007bff;
+  }
+  

@@ -1,82 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './UserOSQuiz.module.css';
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [isQuizComplete, setIsQuizComplete] = useState(false);
+  const [score, setScore] = useState(0);
 
-  const questions = [
-    {
-      questionText: 'hello',
-      options: ['a', 'b', 'c', 'd'],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-    {
-      questionText: '',
-      options: [],
-    },
-  ];
+  useEffect(() => {
+    const fetchQuiz = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/v1/quiz/OS'); // Fetch the quiz based on subject
+        const data = await response.json();
+        setQuestions(data.questions);
+      } catch (error) {
+        console.error('Error fetching quiz:', error);
+      }
+    };
+
+    fetchQuiz();
+  }, []);
+
+  const handleOptionSelect = (option) => {
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[currentQuestion] = option;
+    setUserAnswers(updatedAnswers);
+  };
 
   const handleNextClick = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      alert('You have completed the quiz!');
-      setCurrentQuestion(0); // Reset to the first question or handle it as needed
+      calculateScore();
+      setIsQuizComplete(true);
     }
   };
 
+  const calculateScore = () => {
+    let totalScore = 0;
+    questions.forEach((question, index) => {
+      if (question.correctOptionIndex === userAnswers[index]) {
+        totalScore += 1;
+      }
+    });
+    setScore(totalScore);
+  };
+
   return (
-    
     <div className={styles.quizContainer}>
       <h1 className={styles.title}>OS Quiz</h1>
-      <p className={styles.subtitle}>Fill out this OS quiz!</p>
-      <div className={styles.questionContainer}>
-        <p className={styles.questionText}>
-          {questions[currentQuestion].questionText}
-        </p>
-        <div className={styles.optionsContainer}>
-          {questions[currentQuestion].options.map((option, index) => (
-            <label key={index} className={styles.optionLabel}>
-              <input type="radio" name="answer" value={option} className={styles.radioInput} />
-              {option}
-            </label>
-          ))}
+      {isQuizComplete ? (
+        <div className={styles.resultContainer}>
+          <h2 className={styles.resultTitle}>Quiz Complete!</h2>
+          <p className={styles.resultScore}>You scored: {score} out of {questions.length}</p>
+          <div className={styles.questionList}>
+          {questions.map((question, index) => (
+              <div key={index} className={styles.questionResult}>
+                <p className={styles.questionText}>
+                  {index + 1}. {question.question}
+                </p>
+                <p className={userAnswers[index] === question.correctOptionIndex ? styles.correct : styles.incorrect}>
+                  Your Answer: {userAnswers[index]}
+                </p>
+                <p className={styles.correctAnswer}>
+                  Correct Answer: {question.correctOptionIndex}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-        <button onClick={handleNextClick} className={styles.nextButton}>
-          Next
-        </button>
-      </div>
+      ) : (
+        <div className={styles.questionContainer}>
+          {questions.length > 0 ? (
+            <>
+              <p className={styles.questionText}>
+                {currentQuestion + 1}. {questions[currentQuestion].question} {/* Question number added here */}
+              </p>
+              <div className={styles.optionsContainer}>
+                {questions[currentQuestion].options.map((option, index) => (
+                  <label key={index} className={styles.optionLabel}>
+                    <input
+                      type="radio"
+                      name="answer"
+                      value={option}
+                      className={styles.radioInput}
+                      onChange={() => handleOptionSelect(option)}
+                      checked={userAnswers[currentQuestion] === option}
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
+              <button onClick={handleNextClick} className={styles.nextButton}>
+                {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
+              </button>
+            </>
+          ) : (
+            <p>Loading quiz...</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
