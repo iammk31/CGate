@@ -18,7 +18,6 @@ import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useDispatch } from 'react-redux'
 import { login } from '../../store/authSlice';
-import { backendUrl } from '../../utils/config';
 
 
 
