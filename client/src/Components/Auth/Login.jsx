@@ -83,17 +83,19 @@ const Login = () => {
               <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>Login into your account</h5>
 
               <MDBInput wrapperClass='mb-4'
-                label='Email address'
+                // label='Email address'
                 id='formControlLg'
                 type='email'
                 size="lg"
+                placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} />
               <MDBInput wrapperClass='mb-4'
-                label='Password'
+                // label='Password'
                 id='formControlLg'
                 type='password'
                 size="lg"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} />
 

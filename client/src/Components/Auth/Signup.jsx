@@ -149,20 +149,21 @@ const Signup = () => {
                 <div>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="FirstName"
+                    // label="FirstName"
                     id="formControlLg"
                     type="text"
                     size="lg"
+                    placeholder="FirstName"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="LastName"
+                    // label="LastName"
                     id="formControlLg"
                     type="text"
                     size="lg"
-                    placeholder="do not fill if you don't have one"
+                    placeholder="Last Name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                   />
@@ -170,46 +171,49 @@ const Signup = () => {
                   <div className="d-flex flex-row align-items-start mb-4">
                     <MDBInput
                       wrapperClass="mb-4 flex-grow-1"
-                      label="Email address"
+                      // label="Email address"
                       id="formControlLg"
                       type="email"
                       size="lg"
+                      placeholder="Email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <MDBBtn
-                      className="ms-2 "
+                    <button
+                      className="ms-2 verify-btn"
                       color="primary"
                       size="lg"
                       onClick={handleVerifyClick}
                     >
                       Verify
-                    </MDBBtn>
+                    </button>
                   </div>
 
                   {showOtpInput && (
                     <div className="mt-4">
                       <MDBInput
                         wrapperClass="mb-4"
-                        label="Enter OTP"
+                        // label="Enter OTP"
                         id="otpInput"
                         type="text"
                         size="lg"
+                        placeholder="Enter OTP"
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                       />
-                      <MDBBtn color="success" size="lg" onClick={handleSubmit}>
+                      <button className="submit-btn" color="success" size="lg" onClick={handleSubmit}>
                         Submit OTP
-                      </MDBBtn>
+                      </button>
                     </div>
                   )}
 
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Password"
+                    // label="Password"
                     id="formControlLg"
                     type="password"
                     size="lg"
+                    placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />

@@ -14,3 +14,8 @@
 body{
   background-color: black;
 }
+.verify-btn{
+  padding: 0 15px 15px 0;
+  background-color: #2c1f31;
+  color: aliceblue;
+}
