@@ -3,13 +3,14 @@ import axios from 'axios';
 import styles from './PrepVideos.module.css';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import { backendUrl } from '../../utils/config.js';
 
 const VideoPlayer = () => {
   const [videos, setVideos] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/v1/cgate/videos")
+    axios.get(`${backendUrl}api/v1/cgate/videos`)
       .then(response => setVideos(response.data))
       .catch(error => console.error('Error fetching videos:', error));
   }, []);

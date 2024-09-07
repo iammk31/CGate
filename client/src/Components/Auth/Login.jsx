@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from "axios";
 import toast from "react-hot-toast";
+import { backendUrl } from '../../utils/config.js';
 import './Login.css';
 import {
   MDBContainer,
@@ -17,6 +18,7 @@ import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useDispatch } from 'react-redux'
 import { login } from '../../store/authSlice';
+import { backendUrl } from '../../utils/config';
 
 
 
@@ -30,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/cgate/login",
+        `${backendUrl}api/v1/cgate/login`,
         { email, password },
         {
           headers: {

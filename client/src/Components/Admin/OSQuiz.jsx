@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './OSQuiz.module.css';
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from '../../utils/config.js';
 
 const OSQuiz = () => {
   const [quizzes, setQuizzes] = useState([
@@ -39,7 +40,7 @@ const OSQuiz = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/api/v1/quiz/submit', {
+      const response = await fetch(`${backendUrl}api/v1/quiz/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

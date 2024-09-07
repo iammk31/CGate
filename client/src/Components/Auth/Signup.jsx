@@ -18,6 +18,7 @@ import Footer from "../Footer";
 import { useDispatch } from "react-redux";
 import { getUserData } from "../../store/userSlice"; // Assume you have an action to set user data
 import { login } from "../../store/authSlice";
+import { backendUrl } from "../../utils/config.js";
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -37,7 +38,7 @@ const Signup = () => {
     }
     try {
       await axios.post(
-        "http://localhost:4000/api/v1/cgate/sendOtp",
+        `${backendUrl}api/v1/cgate/sendOtp`,
         { email },
         {
           headers: {
@@ -62,7 +63,7 @@ const Signup = () => {
       // Verify the OTP
 
       const verifyStatus = await axios.post(
-        "http://localhost:4000/api/v1/cgate/verify",
+        `${backendUrl}api/v1/cgate/verify`,
         { email, otp }
       );
 
@@ -84,7 +85,7 @@ const Signup = () => {
       console.log("inside if");
       try {
         const signupStatus = await axios.post(
-          "http://localhost:4000/api/v1/cgate/send",
+          `${backendUrl}api/v1/cgate/send`,
           { firstName, lastName, email, password, uType }
         );
         const data = await signupStatus.data;

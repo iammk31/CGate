@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserOSQuiz.module.css';
+import { backendUrl } from '../../utils/config.js';
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -11,7 +12,7 @@ const Quiz = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/v1/quiz/OS'); // Fetch the quiz based on subject
+        const response = await fetch(`${backendUrl}api/v1/quiz/OS`); // Fetch the quiz based on subject
         const data = await response.json();
         setQuestions(data.questions);
       } catch (error) {
