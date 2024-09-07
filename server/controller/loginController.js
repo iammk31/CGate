@@ -9,11 +9,11 @@ const send_login = async (req, res, next) => {
     try {
         const user = await Signup.findOne({ email });
         if (!user) {
-            return next(new ErrorHandler("Invalid credentials", 401));
+            return next(new ErrorHandler("User not found", 401));
         }
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
-            return next(new ErrorHandler("Invalid credentials", 401));
+            return next(new ErrorHandler("Wrong Password", 401));
         }
         if (user.uType !== 'user' && user.uType !== 'admin') {
             return next(new ErrorHandler("Unauthorized user type", 403));
@@ -28,10 +28,10 @@ const send_login = async (req, res, next) => {
             user
         });
     } catch (error) {
-        if (error.name === "ValidationError") {
-            const ValidationError = Object.values(error.errors).map(val => val.message);
-            return next(new ErrorHandler(ValidationError.join(" & "), 400));
-        }
+        res.status(500).json({ 
+            success: false, 
+            message: "error in login", 
+        });
         return next(new ErrorHandler(error.message || "Internal Server Error", 500));
     }
 }
