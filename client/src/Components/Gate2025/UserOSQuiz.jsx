@@ -22,9 +22,10 @@ const Quiz = () => {
     fetchQuiz();
   }, []);
 
-  const handleOptionSelect = (option) => {
+  // Store the selected option text in userAnswers
+  const handleOptionSelect = (optionText) => {
     const updatedAnswers = [...userAnswers];
-    updatedAnswers[currentQuestion] = option;
+    updatedAnswers[currentQuestion] = optionText; // Save the text of the selected option
     setUserAnswers(updatedAnswers);
   };
 
@@ -37,10 +38,14 @@ const Quiz = () => {
     }
   };
 
+  // Calculate score by matching the correct option text with the selected option text
   const calculateScore = () => {
     let totalScore = 0;
     questions.forEach((question, index) => {
-      if (question.correctOptionIndex === userAnswers[index]) {
+      const correctAnswerText = question.options[question.correctOptionIndex];
+      const selectedAnswerText = userAnswers[index];
+      
+      if (correctAnswerText === selectedAnswerText) {
         totalScore += 1;
       }
     });
@@ -55,16 +60,16 @@ const Quiz = () => {
           <h2 className={styles.resultTitle}>Quiz Complete!</h2>
           <p className={styles.resultScore}>You scored: {score} out of {questions.length}</p>
           <div className={styles.questionList}>
-          {questions.map((question, index) => (
+            {questions.map((question, index) => (
               <div key={index} className={styles.questionResult}>
                 <p className={styles.questionText}>
                   {index + 1}. {question.question}
                 </p>
-                <p className={userAnswers[index] === question.correctOptionIndex ? styles.correct : styles.incorrect}>
+                <p className={userAnswers[index] === question.options[question.correctOptionIndex] ? styles.correct : styles.incorrect}>
                   Your Answer: {userAnswers[index]}
                 </p>
                 <p className={styles.correctAnswer}>
-                  Correct Answer: {question.correctOptionIndex}
+                  Correct Answer: {question.options[question.correctOptionIndex]}
                 </p>
               </div>
             ))}
@@ -75,7 +80,7 @@ const Quiz = () => {
           {questions.length > 0 ? (
             <>
               <p className={styles.questionText}>
-                {currentQuestion + 1}. {questions[currentQuestion].question} {/* Question number added here */}
+                {currentQuestion + 1}. {questions[currentQuestion].question}
               </p>
               <div className={styles.optionsContainer}>
                 {questions[currentQuestion].options.map((option, index) => (
@@ -83,10 +88,10 @@ const Quiz = () => {
                     <input
                       type="radio"
                       name="answer"
-                      value={option}
+                      value={option} // Use the option text as the value
                       className={styles.radioInput}
-                      onChange={() => handleOptionSelect(option)}
-                      checked={userAnswers[currentQuestion] === option}
+                      onChange={() => handleOptionSelect(option)} // Pass the option text to the handler
+                      checked={userAnswers[currentQuestion] === option} // Compare saved option text with the current option text
                     />
                     {option}
                   </label>
