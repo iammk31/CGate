@@ -64,8 +64,8 @@ export const sendOtp = async (req, res, next) => {
 };
 
 const send_signup = async (req, res, next) => {
-    const { firstName, lastName, email, password, phone, uType } = req.body;
-    if (!firstName || !email || !password || !phone) {
+    const { firstName, lastName, email, password, uType } = req.body;
+    if (!firstName || !email || !password ) {
         return next(new ErrorHandler("Please Fill The Form!", 400));
     }
     
@@ -73,7 +73,7 @@ const send_signup = async (req, res, next) => {
         
 
         // const { firstName, lastName, password, phone, uType } = req.body;
-        const user = await Signup.create({ firstName, lastName, email, password, phone, uType });
+        const user = await Signup.create({ firstName, lastName, email, password, uType });
 
         const token = jwt.sign({ id: user.email, uType: user.uType }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_EXPIRES_IN,

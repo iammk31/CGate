@@ -28,12 +28,6 @@ const signupSchema = new mongoose.Schema({
     required: true,
     validate: [validator.isEmail, "Provide a valid email"],
   },
-  phone: {
-    type: String,
-    required: true,
-    minLength: [10, "Phone number must contain 10 Digits."],
-    maxLength: [10, "Phone number must contain 10 Digits."],
-  },
   uType: {
     type: String,
     required: true,
