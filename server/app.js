@@ -21,7 +21,10 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/cgate', cgateRouter);
-app.use('/api/v1/quiz', quizRouter); // Add the quiz routes
+app.use('/api/v1/quiz', quizRouter);
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
 
 dbConnection();
 
