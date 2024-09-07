@@ -1,20 +1,16 @@
 import ErrorHandler from "../error/error.js";
 import { Signup } from "../models/signupModel.js";
-import {Verify } from "../models/verifyModel.js";
+import { Verify } from "../models/verifyModel.js";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 
 const generateOTP = () => {
     return Math.floor(100000 + Math.random() * 900000);
+};
 
-}
 export const sendOtp = async (req, res, next) => {
-    
-    
     const { email } = req.body;
     
-    
-
     if (!email) {
         return next(new ErrorHandler("Email is required!", 400));
     }
@@ -59,6 +55,10 @@ export const sendOtp = async (req, res, next) => {
             message: "OTP sent successfully!",
         });
     } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to send OTP",
+    })
         next(error);
     }
 };
@@ -70,17 +70,23 @@ const send_signup = async (req, res, next) => {
     }
     
     try {
-        
-
         // const { firstName, lastName, password, phone, uType } = req.body;
-        const user = await Signup.create({ firstName, lastName, email, password, phone, uType });
+    const user = await Signup.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      phone,
+      uType,
+    });
 
-        const token = jwt.sign({ id: user.email, uType: user.uType }, process.env.JWT_SECRET, {
+    const token = jwt.sign(
+      { id: user.email, uType: user.uType },
+      process.env.JWT_SECRET,
+      {
             expiresIn: process.env.JWT_EXPIRES_IN,
-        });
-        
-        
-        
+      }
+    );
 
         await Verify.deleteOne({ email });
 
@@ -88,14 +94,13 @@ const send_signup = async (req, res, next) => {
             success: true,
             message: "User registered successfully!",
             token,
-            user
+      user,
         });
-
     } catch (error) {
-        if (error.name === 'ValidationError') {
-            const validationErrors = Object.values(error.errors).map(err => err.message);
-            return next(new ErrorHandler(validationErrors.join(', '), 400));
-        }
+    res.status(500).json({
+      success: false,
+      message: "Failed to register user",
+    })
         return next(error);
     }
 };
@@ -107,22 +112,15 @@ export const verify_signup = async (req, res, next) => {
         if (!verifyRecord || verifyRecord.otp !== otp) {
             return next(new ErrorHandler("Invalid or expired OTP", 400));
         }
-        // const { firstName, lastName, password, phone, uType } = req.body;
-        // const user = await Signup.create({ firstName, lastName, email, password, phone, uType });
-
-        // const token = jwt.sign({ id: user.email, uType: user.uType }, process.env.JWT_SECRET, {
-        //     expiresIn: process.env.JWT_EXPIRES_IN,
-        // });
-
-        // await Verify.deleteOne({ email });
-
         res.status(201).json({
             success: true,
             message: "otp verified successfully",
-            // token,
-            // user
         });
     } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to verify otp",
+    })
         return next(error);
     }
 };
