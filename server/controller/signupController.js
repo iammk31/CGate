@@ -64,13 +64,14 @@ export const sendOtp = async (req, res, next) => {
 };
 
 const send_signup = async (req, res, next) => {
-    const { firstName, lastName, email, password, phone, uType } = req.body;
-    if (!firstName || !email || !password || !phone) {
+    const { firstName, lastName, email, password, uType } = req.body;
+    if (!firstName || !email || !password ) {
         return next(new ErrorHandler("Please Fill The Form!", 400));
     }
     
     try {
         // const { firstName, lastName, password, phone, uType } = req.body;
+<<<<<<< HEAD
     const user = await Signup.create({
       firstName,
       lastName,
@@ -79,6 +80,9 @@ const send_signup = async (req, res, next) => {
       phone,
       uType,
     });
+=======
+        const user = await Signup.create({ firstName, lastName, email, password, uType });
+>>>>>>> 03bd45ee8d3f4568de600145d964d53a7805f374
 
     const token = jwt.sign(
       { id: user.email, uType: user.uType },
