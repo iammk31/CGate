@@ -76,7 +76,7 @@ const send_signup = async (req, res, next) => {
       lastName,
       email,
       password,
-      phone,
+      // phone,
       uType,
     });
 

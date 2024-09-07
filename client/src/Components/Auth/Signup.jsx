@@ -11,36 +11,30 @@ import {
   MDBCol,
   MDBIcon,
   MDBInput,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { useDispatch } from "react-redux";
 import { getUserData } from "../../store/userSlice"; // Assume you have an action to set user data
-
+import { login } from "../../store/authSlice";
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
   const [uType, setUType] = useState("user");
+  const [showOtpInput, setShowOtpInput] = useState(false);
+  const [otp, setOtp] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    dispatch(
-      getUserData({
-        firstName,
-        lastName,
-        email,
-        phone,
-        password,
-        uType,
-      })
-    );
-
+  const handleVerifyClick = async () => {
+    // Add your email verification logic here
+    if (email !== "") {
+      setShowOtpInput(true);
+    }
     try {
       await axios.post(
         "http://localhost:4000/api/v1/cgate/sendOtp",
@@ -52,10 +46,67 @@ const Signup = () => {
           withCredentials: true,
         }
       );
-      toast.success("OTP sent to your email. Please verify to complete registration.");
-      navigate("/verify");
+      toast.success(
+        "OTP sent to your email. Please verify to complete registration."
+      );
+      
     } catch (error) {
       toast.error(error.response.data.message);
+    }
+    
+  };
+
+  const handleSubmit = async () => {
+    console.log("inside submit");
+    try {
+      // Verify the OTP
+
+      const verifyStatus = await axios.post(
+        "http://localhost:4000/api/v1/cgate/verify",
+        { email, otp }
+      );
+
+      if (verifyStatus.data.success) {
+        return true;
+      } else {
+        toast.error("OTP verification failed.");
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    console.log("inside signup");
+    
+    const isVerified = await handleSubmit();
+    if (isVerified) {
+      console.log("inside if");
+      try {
+        const signupStatus = await axios.post(
+          "http://localhost:4000/api/v1/cgate/send",
+          { firstName, lastName, email, password, uType }
+        );
+        const data = await signupStatus.data;
+        const { token, user } = data;
+        if (signupStatus.data.success) {
+          toast.success("Signup successful!");
+          dispatch(getUserData({}));
+          if (data.token != null && data.user.uType === "admin") {
+            dispatch(login({ token, user }));
+            localStorage.setItem("admin", data.user.uType);
+            navigate("/admin");
+          } else {
+            dispatch(login({ token, user }));
+            navigate("/");
+          }
+        }
+      } catch (error) {
+          console.error(error.response.data.message);
+          console.log("first verify email");
+          
+      }
+      
     }
   };
 
@@ -95,53 +146,74 @@ const Signup = () => {
                   SignUp into your account
                 </h5>
 
-                <MDBInput
-                  wrapperClass="mb-4"
-                  label="FirstName"
-                  id="formControlLg"
-                  type="text"
-                  size="lg"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-                <MDBInput
-                  wrapperClass="mb-4"
-                  label="LastName"
-                  id="formControlLg"
-                  type="text"
-                  size="lg"
-                  placeholder="do not fill if you don't have one"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
+                <div>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="FirstName"
+                    id="formControlLg"
+                    type="text"
+                    size="lg"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="LastName"
+                    id="formControlLg"
+                    type="text"
+                    size="lg"
+                    placeholder="do not fill if you don't have one"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
 
-                <MDBInput
-                  wrapperClass="mb-4"
-                  label="Email address"
-                  id="formControlLg"
-                  type="email"
-                  size="lg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <MDBInput
-                  wrapperClass="mb-4"
-                  label="Phone"
-                  id="formControlLg"
-                  type="text"
-                  size="lg"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-                <MDBInput
-                  wrapperClass="mb-4"
-                  label="Password"
-                  id="formControlLg"
-                  type="password"
-                  size="lg"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                  <div className="d-flex flex-row align-items-start mb-4">
+                    <MDBInput
+                      wrapperClass="mb-4 flex-grow-1"
+                      label="Email address"
+                      id="formControlLg"
+                      type="email"
+                      size="lg"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <MDBBtn
+                      className="ms-2 "
+                      color="primary"
+                      size="lg"
+                      onClick={handleVerifyClick}
+                    >
+                      Verify
+                    </MDBBtn>
+                  </div>
+
+                  {showOtpInput && (
+                    <div className="mt-4">
+                      <MDBInput
+                        wrapperClass="mb-4"
+                        label="Enter OTP"
+                        id="otpInput"
+                        type="text"
+                        size="lg"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                      />
+                      <MDBBtn color="success" size="lg" onClick={handleSubmit}>
+                        Submit OTP
+                      </MDBBtn>
+                    </div>
+                  )}
+
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Password"
+                    id="formControlLg"
+                    type="password"
+                    size="lg"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
                 <button
                   className="button-Login"
