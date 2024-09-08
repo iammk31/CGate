@@ -14,13 +14,7 @@ app.use(express.json());
 const allowedOrigins = ['https://c-gate-orcin.vercel.app'];
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: ['https://c-gate-orcin.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // Allow cookies to be sent with requests
 };

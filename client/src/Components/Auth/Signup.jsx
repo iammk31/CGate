@@ -11,7 +11,6 @@ import {
   MDBCol,
   MDBIcon,
   MDBInput,
-  MDBBtn,
 } from "mdb-react-ui-kit";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
