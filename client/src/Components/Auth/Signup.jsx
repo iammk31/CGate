@@ -151,7 +151,7 @@ const Signup = () => {
                   <MDBInput
                     wrapperClass="mb-4"
                     // label="FirstName"
-                    id="formControlLg"
+                    id="formControlLg1"
                     type="text"
                     size="lg"
                     placeholder="FirstName"
@@ -161,7 +161,7 @@ const Signup = () => {
                   <MDBInput
                     wrapperClass="mb-4"
                     // label="LastName"
-                    id="formControlLg"
+                    id="formControlLg2"
                     type="text"
                     size="lg"
                     placeholder="Last Name"
@@ -173,7 +173,7 @@ const Signup = () => {
                     <MDBInput
                       wrapperClass="mb-4 flex-grow-1"
                       // label="Email address"
-                      id="formControlLg"
+                      id="formControlLg3"
                       type="email"
                       size="lg"
                       placeholder="Email address"
@@ -211,7 +211,7 @@ const Signup = () => {
                   <MDBInput
                     wrapperClass="mb-4"
                     // label="Password"
-                    id="formControlLg"
+                    id="formControlLg4"
                     type="password"
                     size="lg"
                     placeholder="Enter Password"
