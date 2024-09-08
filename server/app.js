@@ -11,7 +11,7 @@ dotenv.config({ path: './config/config.env' });
 app.use(express.json());
 
 // Allowed origins
-const allowedOrigins = ['https://c-gate-r8bzurbcq-mohit-kumars-projects-7cb1498e.vercel.app'];
+const allowedOrigins = ['https://c-gate-orcin.vercel.app'];
 
 const corsOptions = {
   origin: (origin, callback) => {
