@@ -93,7 +93,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)} />
               <MDBInput wrapperClass='mb-4'
                 // label='Password'
-                id='formControlLg'
+                id='formControlLgg'
                 type='password'
                 size="lg"
                 placeholder="Password"
