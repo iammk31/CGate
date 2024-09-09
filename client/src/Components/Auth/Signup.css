@@ -14,8 +14,56 @@
 body{
   background-color: black;
 }
-.verify-btn{
-  padding: 0 15px 15px 0;
-  background-color: #2c1f31;
-  color: aliceblue;
+.verify-btn {
+  background-color: #1f4064b6; 
+  color: #fff; 
+  padding: 9px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 1.2rem; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.verify-btn:hover {
+  background-color: #19291c;
+  transform: scale(1.05); 
+}
+
+.verify-btn:active {
+  background-color: #004085; 
+  transform: scale(0.98); 
+}
+
+.verify-btn:focus {
+  outline: none; 
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.4); 
+}
+
+
+.submit-btn {
+  background-color: #282aa7af; 
+  color: #fff; 
+  margin-bottom: 10px;
+  padding: 11px 16px; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 0.8rem; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.submit-btn:hover {
+  background-color: #19291c; 
+  transform: scale(1.05); 
+}
+
+.submit-btn:active {
+  background-color: #1e7e34; 
+  transform: scale(0.98); 
+}
+
+.submit-btn:focus {
+  outline: none; 
+  box-shadow: 0 0 0 4px rgba(25, 39, 28, 0.4); 
 }

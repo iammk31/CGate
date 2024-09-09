@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from './Navbar.module.css';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from "../store/authSlice";
 
@@ -11,14 +11,14 @@ const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.token);
-    
-    useEffect(() => {   
-        if (token!==null) {
+
+    useEffect(() => {
+        if (token !== null) {
             setLoggedIn(true);
         }
-        
+
     }, [loggedIn]);
-    
+
     const handleScroll = () => {
         if (window.scrollY > lastScrollY) {
             setNavbarVisible(false);
@@ -39,6 +39,8 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [lastScrollY]);
+
+
     return (
         <nav
             className={styles.navbar}
