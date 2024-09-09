@@ -11,10 +11,10 @@ dotenv.config({ path: './config/config.env' });
 app.use(express.json());
 
 // Allowed origins
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['https://c-gate-orcin.vercel.app/'];
 
 const corsOptions = {
-  origin: ['http://localhost:3000'],
+  origin: ['https://c-gate-orcin.vercel.app/'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // Allow cookies to be sent with requests
 };
