@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from './Contact.module.css';
-import { backendUrl } from "../utils/config";
+import { backendUrl } from "../utils/config.js";
 import { useSelector } from "react-redux";
 
 const Contact = () => {
