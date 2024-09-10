@@ -83,7 +83,7 @@ const Home = () => {
             />
           </div>
         </div>
-        <div className="bg-[#2c1f31] flex flex-col md:flex-row mx-auto p-4 justify-center items-center gap-6 rounded-lg max-w-6xl">
+        <div className="bg-[#2c1f31] flex flex-col md:flex-row mx-auto p-4 justify-center items-center gap-6 rounded-lg w-3/4 md:max-w-6xl">
           {cardData.map((item, index) => (
             <React.Fragment key={index}>
               <div className="bg-white/40 flex items-center justify-center p-4 rounded-full">
