@@ -26,16 +26,16 @@ body {
 }
 
 .home {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  margin-left: auto;
+  margin-left: auto; */
 }
 
 .login {
-  margin-left: 2rem;
+  /* margin-left: 2rem;
   list-style-type: none;
   display: flex;
-  padding: 0;
+  padding: 0; */
 }
 
 .brand {
