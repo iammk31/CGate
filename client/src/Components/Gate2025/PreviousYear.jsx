@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './PreviousYear.module.css';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
+import { useSelector } from 'react-redux';
 
 const YearCards = () => {
   const years = ['2023', '2022', '2021', '2020', '2019', '2018'];
-
   const branches = {
     '2023': [
       { name: 'Computer Science', pdfUrl: 'https://images.collegedunia.com/public/image/CS_GATE2023_2_9dcb909fba2093af1145bcf9452ada3c.pdf' },
@@ -50,14 +50,20 @@ const YearCards = () => {
       { name: 'Civil', pdfUrl: 'https://gate.iitkgp.ac.in/documents/gatepapers/2019/ce1_2019.pdf' },
     ],
   };
-
   const [selectedYear, setSelectedYear] = useState(null);
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  const token =useSelector((state) => state.auth.token);
+  useEffect(() => {
+    if (token !== null) {
+      setLoggedIn(true);
+    }
+  })
   const handleCardClick = (year) => {
-    if (selectedYear === year) {
-      setSelectedYear(null); // Close the list if the same year is clicked again
-    } else {
+    if (loggedIn && selectedYear === null) {
       setSelectedYear(year);
+    } else {
+      setSelectedYear(null); // Close the list if the same year is clicked again
+      alert("You must be logged in to view the previous year papers");
     }
   };
 

@@ -3,7 +3,7 @@ import styles from './OSQuiz.module.css';
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from '../../utils/config.js';
 
-const OSQuiz = () => {
+const OSQuiz = ({subject}) => {
   const [quizzes, setQuizzes] = useState([
     { question: '', options: ['', '', '', ''], correctOptionIndex: null },
     { question: '', options: ['', '', '', ''], correctOptionIndex: null },
@@ -46,7 +46,7 @@ const OSQuiz = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          subject: 'OS',
+          subject: subject,
           questions: quizzes,
         }),
       });
@@ -66,7 +66,7 @@ const OSQuiz = () => {
 
   return (
     <form className={styles.quizForm} onSubmit={handleSubmit}>
-      <h2>Operating Systems Quiz</h2>
+      <h2>Crating a quiz for {subject}</h2>
       {quizzes.map((quiz, quizIndex) => (
         <div key={quizIndex} className={styles.quizItem}>
           <label>
