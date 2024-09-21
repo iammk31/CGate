@@ -59,15 +59,15 @@ const Navbar = () => {
       </div>
       <ul className="flex gap-4 items-center justify-end w-5/6 py-2">
         <div className="flex gap-2  items-center">
-          <li className="relative group">
+          <li className="relative group ">
             <Link
               to={""}
               className="block px-3 py-1 sm:px-4 sm:py-2 hover:bg-[#2c1f31] text-white rounded-lg no-underline text-sm sm:text-base"
             >
               Gate2025
             </Link>
-            <ul className="absolute hidden group-hover:block bg-[#2c1f31] shadow-lg rounded-lg w-40 py-2  text-white">
-              <li>
+            <ul className="absolute hidden group-hover:block bg-[#2c1f31] shadow-lg rounded-lg w-40 py-2  text-white z-1">
+              <li>                
                 <Link
                   to="/PreviousYear"
                   className="block py-2 px-3  text-white no-underline text-sm"
